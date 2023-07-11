@@ -1,5 +1,4 @@
 matplotlib-venn==0.11.7
 pydot
-cartopy==0.21.1
 caesarcipher
 pyfiglet==0.8.post1
