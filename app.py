@@ -25,9 +25,9 @@ def CompareHash(hashed_msz, decoded_msz):
     return hashed_msz == decoded_msz
 
 def Input_data():
-    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ", key="p")
-    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ", key="q")
-    common_key = st.number_input("Please enter the common key to be shared: ", key="common_key")
+    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ", key="input_p")
+    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ", key="input_q")
+    common_key = st.number_input("Please enter the common key to be shared: ", key="input_common_key")
     st.write("\nThanks!")
     return p, q, common_key
 
@@ -55,7 +55,7 @@ def RSAEncryption(e, n, common_key):
     return cipher
 
 def SymmetricEncryption(common_key):
-    message = st.text_input("Please enter the message to be shared:", key="message")
+    message = st.text_input("Please enter the message to be shared:", key="input_message")
     hashed_msz = hashing(message)
     encoded_msz = CaesarCipher(key=common_key).encipher(hashed_msz)
     st.write(f"\nHash for message given is: {hashed_msz}")
@@ -94,7 +94,7 @@ def main():
     try:
         while die:
             Menu()
-            choice = st.number_input("Enter your choice: ", key="choice")
+            choice = st.number_input("Enter your choice: ", key="menu_choice")
             if choice == 1:
                 st.write("##### DATA INPUT #####")
                 p, q, common_key = Input_data()
