@@ -81,10 +81,8 @@ def SymmetricDecryption(hashed_msz, encoded_msz, decipher):
 def main():
     st.header("RSA Encryption and Decryption")
     die = True
-    counter = 0
     try:
         while die:
-            counter += 1
             menu_choice = st.selectbox(
                 "Please Select the mode of operation:",
                 [
@@ -97,7 +95,7 @@ def main():
                     "Decrypt message sent through Symmetric Conversation",
                     "Exit the program",
                 ],
-                key=f"menu_choice_{counter}"
+                key="menu_choice"
             )
 
             if menu_choice == "Give Input":
