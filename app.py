@@ -83,10 +83,9 @@ def main():
     die = True
     try:
         while die:
-            menu_choice = st.selectbox(
+            menu_choice = st.radio(
                 "Please Select the mode of operation:",
                 [
-                    "Select an option",
                     "Give Input",
                     "Initiate Key Generation Process",
                     "Initiate RSA Encryption For Assymetric Common Key sharing",
@@ -95,7 +94,6 @@ def main():
                     "Decrypt message sent through Symmetric Conversation",
                     "Exit the program",
                 ],
-                key=menu_choice
             )
 
             if menu_choice == "Give Input":
