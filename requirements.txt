@@ -2,3 +2,4 @@ matplotlib-venn==0.11.7
 pydot
 caesarcipher
 pyfiglet==0.8.post1
+streamlit
