@@ -128,4 +128,5 @@ def main():
         st.write("\n\nInterrupt received! Exiting cleanly...\n")
 
 if __name__ == '__main__':
+    os.system("streamlit cache clear")
     main()
