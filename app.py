@@ -25,9 +25,9 @@ def CompareHash(hashed_msz, decoded_msz):
     return hashed_msz == decoded_msz
 
 def Input_data():
-    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ")
-    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ")
-    common_key = st.number_input("Please enter the common key to be shared: ")
+    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ", key="input_p")
+    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ", key="input_q")
+    common_key = st.number_input("Please enter the common key to be shared: ", key="input_common_key")
     st.write("\nThanks!")
     return p, q, common_key
 
@@ -36,7 +36,7 @@ def RSAKeyGeneration(p, q):
     totient_func = (p - 1) * (q - 1)
     flag = 1
     while flag:
-        e = st.number_input("Please select value of e: ")
+        e = st.number_input("Please select value of e: ", key="input_e")
         if gcd(totient_func, e) != 1:
             st.write("\nGCD of totient_func and e should be 1 (Relatively prime).")
             st.write("Please try again!")
@@ -55,7 +55,7 @@ def RSAEncryption(e, n, common_key):
     return cipher
 
 def SymmetricEncryption(common_key):
-    message = st.text_input("Please enter the message to be shared:")
+    message = st.text_input("Please enter the message to be shared:", key="input_message")
     hashed_msz = hashing(message)
     encoded_msz = CaesarCipher(key=common_key).encipher(hashed_msz)
     st.write(f"\nHash for message given is: {hashed_msz}")
@@ -81,8 +81,10 @@ def SymmetricDecryption(hashed_msz, encoded_msz, decipher):
 def main():
     st.header("RSA Encryption and Decryption")
     die = True
+    counter = 0
     try:
         while die:
+            counter += 1
             menu_choice = st.selectbox(
                 "Please Select the mode of operation:",
                 [
@@ -94,7 +96,8 @@ def main():
                     "Decrypt Asymmetrically shared common key",
                     "Decrypt message sent through Symmetric Conversation",
                     "Exit the program",
-                ]
+                ],
+                key=f"menu_choice_{counter}"
             )
 
             if menu_choice == "Give Input":
