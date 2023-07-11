@@ -36,7 +36,7 @@ def RSAKeyGeneration(p, q):
     totient_func = (p - 1) * (q - 1)
     flag = 1
     while flag:
-        e = st.number_input("Please select value of e: ", key="e")
+        e = st.number_input("Please select value of e: ", key="input_e")
         if gcd(totient_func, e) != 1:
             st.write("\nGCD of totient_func and e should be 1 (Relatively prime).")
             st.write("Please try again!")
