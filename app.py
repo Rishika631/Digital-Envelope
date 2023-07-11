@@ -25,9 +25,9 @@ def CompareHash(hashed_msz, decoded_msz):
     return hashed_msz == decoded_msz
 
 def Input_data():
-    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ", key="input_p")
-    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ", key="input_q")
-    common_key = st.number_input("Please enter the common key to be shared: ", key="input_common_key")
+    p = st.number_input("Please Enter value of p [Prime number. eg. 7]: ")
+    q = st.number_input("Please Enter value of q [Prime number. eg. 5]: ")
+    common_key = st.number_input("Please enter the common key to be shared: ")
     st.write("\nThanks!")
     return p, q, common_key
 
@@ -36,7 +36,7 @@ def RSAKeyGeneration(p, q):
     totient_func = (p - 1) * (q - 1)
     flag = 1
     while flag:
-        e = st.number_input("Please select value of e: ", key="input_e")
+        e = st.number_input("Please select value of e: ")
         if gcd(totient_func, e) != 1:
             st.write("\nGCD of totient_func and e should be 1 (Relatively prime).")
             st.write("Please try again!")
@@ -55,7 +55,7 @@ def RSAEncryption(e, n, common_key):
     return cipher
 
 def SymmetricEncryption(common_key):
-    message = st.text_input("Please enter the message to be shared:", key="input_message")
+    message = st.text_input("Please enter the message to be shared:")
     hashed_msz = hashing(message)
     encoded_msz = CaesarCipher(key=common_key).encipher(hashed_msz)
     st.write(f"\nHash for message given is: {hashed_msz}")
@@ -83,39 +83,45 @@ def main():
     die = True
     try:
         while die:
-            menu_options = ["Select an option", "Give Input", "Initiate Key Generation Process", 
-                            "Initiate RSA Encryption For Assymetric Common Key sharing", 
-                            "Initiate Symmetric Encryption for conversation after key sharing",
-                            "Decrypt Asymmetrically shared common key",
-                            "Decrypt message sent through Symmetric Conversation",
-                            "Exit the program"]
-            choice = st.selectbox("Please Select the mode of operation:", menu_options, key="menu_choice")
-            
-            if choice == "Give Input":
+            menu_choice = st.selectbox(
+                "Please Select the mode of operation:",
+                [
+                    "Select an option",
+                    "Give Input",
+                    "Initiate Key Generation Process",
+                    "Initiate RSA Encryption For Assymetric Common Key sharing",
+                    "Initiate Symmetric Encryption for conversation after key sharing",
+                    "Decrypt Asymmetrically shared common key",
+                    "Decrypt message sent through Symmetric Conversation",
+                    "Exit the program",
+                ]
+            )
+
+            if menu_choice == "Give Input":
                 st.write("##### DATA INPUT #####")
                 p, q, common_key = Input_data()
                 time.sleep(2)
-            elif choice == "Initiate Key Generation Process":
+            elif menu_choice == "Initiate Key Generation Process":
                 st.write("##### KEY GENERATION PROCESS #####")
                 n, e, d = RSAKeyGeneration(p, q)
                 time.sleep(1)
-            elif choice == "Initiate RSA Encryption For Assymetric Common Key sharing":
+            elif menu_choice == "Initiate RSA Encryption For Assymetric Common Key sharing":
                 st.write("##### RSA ENCRYPTION PROCESS #####")
                 cipher = RSAEncryption(e, n, common_key)
                 time.sleep(1)
-            elif choice == "Initiate Symmetric Encryption for conversation after key sharing":
+            elif menu_choice == "Initiate Symmetric Encryption for conversation after key sharing":
                 st.write("##### SYMMETRIC ENCRYPTION PROCESS #####")
                 hashed_msz, encoded_msz = SymmetricEncryption(common_key)
                 time.sleep(1)
-            elif choice == "Decrypt Asymmetrically shared common key":
+            elif menu_choice == "Decrypt Asymmetrically shared common key":
                 st.write("##### RSA DECRYPTION PROCESS #####")
                 decipher = RSADecryption(n, d, cipher, common_key)
                 time.sleep(1)
-            elif choice == "Decrypt message sent through Symmetric Conversation":
+            elif menu_choice == "Decrypt message sent through Symmetric Conversation":
                 st.write("##### SYMMETRIC DECRYPTION PROCESS #####")
                 SymmetricDecryption(hashed_msz, encoded_msz, decipher)
                 time.sleep(1)
-            elif choice == "Exit the program":
+            elif menu_choice == "Exit the program":
                 die = False
                 st.write("Exiting the program...")
             else:
