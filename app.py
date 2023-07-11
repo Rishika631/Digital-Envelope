@@ -95,7 +95,7 @@ def main():
                     "Decrypt message sent through Symmetric Conversation",
                     "Exit the program",
                 ],
-                key="menu_choice"
+                key=menu_choice
             )
 
             if menu_choice == "Give Input":
